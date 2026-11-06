@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<!-- 
+  ===================================================================
+  💖 HAPPY BIRTHDAY DIVYANSHI - ULTRA-REALISTIC EMOTIONAL EXPERIENCE 💖
+  ===================================================================
+  
+  VERCEL DEPLOYMENT INSTRUCTIONS:
+  1. Save this file as `index.html`.
+  2. Drag & drop the containing folder to https://vercel.com/new
+  ===================================================================
+-->
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Divyanshi ❤️ | A Surprise For You</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        glorious: ['Great Vibes', 'cursive'],
+                        handwriting: ['Caveat', 'cursive']
+                    },
+                    colors: {
+                        midnight: '#0B0518',
+                        roseGold: '#E8A598',
+                        warmGold: '#F5D061',
+                        softPink: '#FFC0CB',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at 50% 20%, #200B3B 0%, #0D051A 60%, #05020B 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Glassmorphic Depth Containers */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 215, 230, 0.25);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .text-glow-gold {
+            text-shadow: 0 0 15px rgba(245, 208, 97, 0.7), 0 0 30px rgba(245, 208, 97, 0.4);
+        }
+
+        .text-glow-rose {
+            text-shadow: 0 0 18px rgba(255, 182, 193, 0.9), 0 0 35px rgba(232, 165, 152, 0.6);
+        }
+
+        /* 3D Realistic Card Tilt & Shadows */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s ease;
+        }
+
+        /* Realistic Dynamic Flame Animation */
+        .real-flame {
+            width: 16px;
+            height: 28px;
+            background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffea70 20%, #ff6a00 65%, rgba(255,0,0,0) 100%);
+            border-radius: 50% 50% 35% 35%;
+            animation: flameFlicker 0.1s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            box-shadow: 0 0 20px #ff8c00, 0 0 40px #ffea00;
+            transform-origin: center bottom;
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.95; }
+            100% { transform: scale(1.12) rotate(2.5deg); opacity: 1; }
+        }
+
+        .flame-extinguished {
+            display: none !important;
+        }
+
+        /* Smoke Particle Physics */
+        .smoke-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(230, 230, 240, 0.6);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: riseSmoke 3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes riseSmoke {
+            0% { opacity: 0.8; transform: translateY(0) scale(1); }
+            50% { opacity: 0.4; }
+            100% { opacity: 0; transform: translateY(-90px) scale(4); }
+        }
+
+        /* Envelope / Letter Slide Animation */
+        .letter-scroll {
+            max-height: 240px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(245, 208, 97, 0.4) transparent;
+        }
+        .letter-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .letter-scroll::-webkit-scrollbar-thumb {
+            background: rgba(245, 208, 97, 0.5);
+            border-radius: 10px;
+        }
+
+        /* Polaroid Tape Styling */
+        .polaroid-tape {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="h-full w-full select-none flex flex-col justify-between items-center relative overflow-hidden font-sans">
+
+    <!-- Canvas Background: Interactive Stars & Floating Light Dust -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Header Controls & Progress Chapter Tracker -->
+    <header class="w-full max-w-md px-6 pt-6 flex justify-between items-center z-20">
+        <!-- Progress Steps -->
+        <div class="flex items-center space-x-2 bg-black/40 backdrop-blur-xl px-4 py-2 rounded-full border border-white/15 shadow-lg">
+            <span id="dot1" class="w-3 h-3 rounded-full bg-roseGold shadow-lg shadow-pink-500/80 transition-all duration-500 scale-125"></span>
+            <span id="dot2" class="w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-500"></span>
+            <span id="dot3" class="w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-500"></span>
+            <span id="chapterTitle" class="text-xs text-rose-200 font-medium ml-2 tracking-wider">CHAPTER I</span>
+        </div>
+
+        <!-- Acoustic Piano Audio Control -->
+        <button id="audioControlBtn" class="glass-card px-4 py-2 rounded-full text-rose-200 hover:text-white transition-all transform active:scale-95 flex items-center space-x-2 text-xs">
+            <i id="audioIcon" class="fas fa-music text-warmGold"></i>
+            <span id="audioStatusText">Piano: OFF</span>
+        </button>
+    </header>
+
+    <!-- MAIN INTERACTIVE CONTAINER -->
+    <main id="mainTouchZone" class="w-full max-w-md px-4 flex-1 flex flex-col justify-center items-center relative z-10 cursor-pointer">
+
+        <!-- ================= TAP 1: THE SEALED HEART ENVELOPE ================= -->
+        <section id="step1" class="w-full flex flex-col items-center justify-center text-center transition-all duration-700">
+            <div id="envelopeCard" class="glass-card tilt-card p-8 rounded-3xl w-full flex flex-col items-center relative overflow-hidden">
+                
+                <!-- Ambient Backdrop Glow -->
+                <div class="absolute -top-20 -left-20 w-44 h-44 bg-pink-600/30 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -right-20 w-44 h-44 bg-purple-600/30 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- 3D Heart Lock Icon -->
+                <div class="w-24 h-24 mb-6 rounded-full bg-gradient-to-tr from-rose-500 via-pink-500 to-warmGold flex items-center justify-center shadow-2xl shadow-pink-500/40 relative group">
+                    <i class="fas fa-heart text-4xl text-white drop-shadow-lg transition-transform duration-300 group-hover:scale-110"></i>
+                    <div class="absolute inset-0 rounded-full bg-white/20 animate-ping opacity-30 pointer-events-none"></div>
+                </div>
+
+                <span class="px-3.5 py-1 bg-white/10 text-rose-200 border border-white/20 rounded-full text-[11px] font-semibold uppercase tracking-widest mb-3">
+                    A Special Surprise 💖
+                </span>
+
+                <h1 class="text-4xl font-bold text-white mb-2 font-serif tracking-wide">
+                    Divyanshi... ✨
+                </h1>
+
+                <p class="text-pink-100/90 text-lg font-handwriting leading-snug mb-8 px-2">
+                    "Kuch khas lamhe, sirf tumhare liye..."
+                </p>
+
+                <!-- Tap Prompt -->
+                <div class="px-6 py-3 rounded-full bg-gradient-to-r from-rose-500 via-purple-600 to-warmGold text-white font-medium text-xs shadow-xl shadow-pink-500/30 flex items-center space-x-2 animate-bounce">
+                    <i class="fas fa-hand-pointer text-yellow-200"></i>
+                    <span>Tap Anywhere To Unlock Heart ❤️</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAP 2: MEMORY SCRAPBOOK & POLAROIDS ================= -->
+        <section id="step2" class="w-full flex flex-col items-center justify-center text-center transition-all duration-700 hidden opacity-0 transform scale-95">
+            <div class="glass-card tilt-card p-6 rounded-3xl w-full flex flex-col items-center relative">
+                
+                <span class="text-[11px] font-bold uppercase tracking-widest text-warmGold bg-white/10 px-3 py-1 rounded-full border border-warmGold/30 mb-4">
+                    CHAPTER II: MEMORIES & SMILES ✨
+                </span>
+
+                <h2 class="text-2xl font-bold text-white mb-2 font-serif leading-snug">
+                    "Tumhari muskaan sab kuch khaas bana deti hai..." 🌸
+                </h2>
+
+                <p class="text-pink-200/80 text-xs mb-6 px-3 leading-relaxed">
+                    You bring a warmth into the world that words can rarely describe. Here's to your elegance, kindness, and beautiful soul.
+                </p>
+
+                <!-- Dynamic Polaroid Memory Card -->
+                <div class="w-56 h-72 bg-white p-4 rounded-2xl shadow-2xl rotate-2 hover:rotate-0 transition-all duration-500 mb-6 flex flex-col justify-between border-4 border-pink-100 relative group">
+                    
+                    <!-- Decorative Tape -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 polaroid-tape rounded-sm rotate-1 z-20"></div>
+
+                    <!-- Polaroid Photo Container -->
+                    <div class="w-full h-48 bg-gradient-to-tr from-purple-900 via-pink-800 to-rose-700 rounded-xl flex flex-col items-center justify-center text-white relative overflow-hidden shadow-inner">
+                        <i class="fas fa-crown text-3xl text-warmGold mb-2 animate-pulse"></i>
+                        <span class="font-glorious text-4xl text-warmGold text-glow-gold">Divyanshi</span>
+                        <span class="text-[9px] font-semibold tracking-widest text-pink-200 uppercase mt-1">Pure Heart & Warmth 👑</span>
+                        <div class="absolute inset-0 bg-white/5 pointer-events-none"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between px-1">
+                        <span class="font-handwriting text-lg text-gray-800 font-bold">Always Precious ✨</span>
+                        <i class="fas fa-sparkles text-pink-500 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Action Badge -->
+                <div class="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-warmGold text-white font-medium text-xs shadow-lg shadow-purple-500/30 flex items-center space-x-2 animate-pulse">
+                    <i class="fas fa-star text-yellow-300"></i>
+                    <span>Tap One Last Time For The Grand Stage! 🎁</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAP 3: GRAND BIRTHDAY CELEBRATION ================= -->
+        <section id="step3" class="w-full flex flex-col items-center justify-center text-center transition-all duration-700 hidden opacity-0">
+            
+            <!-- Banner Header -->
+            <div class="mb-3">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-warmGold bg-warmGold/20 px-3.5 py-1 rounded-full border border-warmGold/40">
+                    🎉 THE GRAND MOMENT 🎉
+                </span>
+                <h1 class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-warmGold to-pink-200 text-glow-rose font-glorious tracking-wide mt-1">
+                    Happy Birthday Divyanshi!
+                </h1>
+                <p class="text-pink-200/90 text-xl font-handwriting">
+                    Janmdin Ki Dher Saari Badhaiyan! 🎂✨
+                </p>
+            </div>
+
+            <!-- Realistic 3D Interactive Cake -->
+            <div class="relative my-3 flex flex-col items-center cursor-pointer group" id="cake3DContainer" title="Tap cake to blow candles!">
+                
+                <!-- Candle Flame Physics Container -->
+                <div class="flex space-x-7 mb-1 relative z-20">
+                    <!-- Candle 1 -->
+                    <div class="flex flex-col items-center relative">
+                        <div class="real-flame" id="flame1"></div>
+                        <div class="w-2 h-7 bg-gradient-to-b from-yellow-100 to-pink-400 rounded-t-sm shadow-md"></div>
+                    </div>
+                    <!-- Candle 2 (Center Big) -->
+                    <div class="flex flex-col items-center relative -mt-2">
+                        <div class="real-flame" id="flame2"></div>
+                        <div class="w-2.5 h-9 bg-gradient-to-b from-yellow-100 to-purple-400 rounded-t-sm shadow-md"></div>
+                    </div>
+                    <!-- Candle 3 -->
+                    <div class="flex flex-col items-center relative">
+                        <div class="real-flame" id="flame3"></div>
+                        <div class="w-2 h-7 bg-gradient-to-b from-yellow-100 to-pink-400 rounded-t-sm shadow-md"></div>
+                    </div>
+                </div>
+
+                <!-- Cake Top Tier -->
+                <div class="w-44 h-10 bg-gradient-to-r from-pink-300 via-white to-pink-300 rounded-t-2xl shadow-inner flex items-center justify-around px-2 relative z-10 border-b-2 border-pink-400/40">
+                    <span class="w-3.5 h-4 bg-white rounded-b-full shadow"></span>
+                    <span class="w-3.5 h-5 bg-white rounded-b-full shadow"></span>
+                    <span class="w-3.5 h-3 bg-white rounded-b-full shadow"></span>
+                    <span class="w-3.5 h-5 bg-white rounded-b-full shadow"></span>
+                    <span class="w-3.5 h-4 bg-white rounded-b-full shadow"></span>
+                </div>
+                
+                <!-- Cake Middle Tier -->
+                <div class="w-52 h-11 bg-gradient-to-r from-purple-700 via-pink-600 to-purple-700 rounded-t-lg shadow-xl flex items-center justify-center relative border-b-4 border-purple-900/60">
+                    <span class="text-xs font-serif font-bold text-warmGold tracking-widest text-glow-gold">DIVYANSHI</span>
+                </div>
+
+                <!-- Cake Base & Plate -->
+                <div class="w-60 h-12 bg-gradient-to-r from-rose-500 via-pink-400 to-rose-500 rounded-b-2xl shadow-2xl flex items-center justify-center relative">
+                    <div class="absolute -bottom-2 w-64 h-4 bg-white/20 rounded-full blur-sm"></div>
+                    <div class="absolute -bottom-3.5 w-68 h-4 bg-gradient-to-r from-gray-200 via-white to-gray-200 rounded-full shadow-lg"></div>
+                </div>
+
+                <!-- Blow Candles Hint -->
+                <span id="candleHintText" class="mt-4 text-xs bg-black/50 text-pink-200 px-4 py-1.5 rounded-full backdrop-blur-md border border-pink-500/30 flex items-center gap-2 animate-pulse">
+                    <i class="fas fa-wind text-warmGold"></i> Tap cake to blow candles & make a wish!
+                </span>
+            </div>
+
+            <!-- Deep Emotional Personal Letter -->
+            <div class="w-full max-w-sm mt-2">
+                <div class="glass-card p-5 rounded-2xl text-left relative border border-white/20 shadow-2xl">
+                    <div class="flex items-center space-x-2 border-b border-white/10 pb-2 mb-3">
+                        <i class="fas fa-envelope-open-text text-warmGold text-sm"></i>
+                        <span class="text-xs font-semibold text-pink-200 uppercase tracking-wider">A Letter Written For You</span>
+                    </div>
+
+                    <div class="letter-scroll pr-1">
+                        <p class="text-xs text-pink-100/90 leading-relaxed font-sans">
+                            Dear Divyanshi,<br><br>
+                            Aaj ke iss khas din par, bas dil se ye dua hai ki tumhari zindagi hamesha muskurahat, khushiyon aur sukoon se bhari rahe. ✨<br><br>
+                            Tumhari presence me ek aisi warmth aur positivity hai jo har kisi ka din khubsurat bana deti hai. May every dream you hold in your heart turn into reality this year.<br><br>
+                            Hamesha aisi hi chamakti raho aur apni pyaari si smile se duniya me roshni phelaati raho! Happy Birthday! 🌸✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Replay Fireworks & Sparklers Button -->
+            <button onclick="triggerSparklerBurst()" class="mt-4 px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-warmGold text-white font-semibold text-xs tracking-widest uppercase shadow-xl shadow-pink-500/30 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center space-x-2">
+                <i class="fas fa-sparkles text-yellow-200"></i>
+                <span>Celebrate Again 🎉</span>
+            </button>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-3 text-center text-[10px] text-pink-200/40 z-20 tracking-wider">
+        Crafted with ❤️ specially for Divyanshi
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT & AUDIO ENGINE -->
+    <script>
+        let currentStep = 1;
+        let isAudioPlaying = false;
+        let audioContext = null;
+        let melodyLoopTimeout = null;
+
+        // --- 1. 3-TAP STEP SYSTEM ---
+        const mainTouchZone = document.getElementById('mainTouchZone');
+
+        mainTouchZone.addEventListener('click', (e) => {
+            // Prevent progression if user clicks cake or buttons
+            if (e.target.closest('#cake3DContainer') || e.target.closest('button')) {
+                return;
+            }
+
+            if (currentStep === 1) {
+                advanceStep(2);
+                playChimeSFX();
+                if (!isAudioPlaying) togglePianoMelody();
+            } else if (currentStep === 2) {
+                advanceStep(3);
+                playChimeSFX();
+                triggerCelebrationFireworks();
+            }
+        });
+
+        function advanceStep(nextStep) {
+            currentStep = nextStep;
+            
+            const dot1 = document.getElementById('dot1');
+            const dot2 = document.getElementById('dot2');
+            const dot3 = document.getElementById('dot3');
+            const chapterTitle = document.getElementById('chapterTitle');
+
+            const s1 = document.getElementById('step1');
+            const s2 = document.getElementById('step2');
+            const s3 = document.getElementById('step3');
+
+            if (nextStep === 2) {
+                s1.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    s1.classList.add('hidden');
+                    s2.classList.remove('hidden');
+                    setTimeout(() => s2.classList.remove('opacity-0', 'scale-95'), 50);
+                }, 400);
+
+                dot1.className = "w-2.5 h-2.5 rounded-full bg-white/20";
+                dot2.className = "w-3 h-3 rounded-full bg-warmGold shadow-lg shadow-yellow-400/80 scale-125 transition-all duration-500";
+                chapterTitle.innerText = "CHAPTER II";
+
+            } else if (nextStep === 3) {
+                s2.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    s2.classList.add('hidden');
+                    s3.classList.remove('hidden');
+                    setTimeout(() => s3.classList.remove('opacity-0'), 50);
+                }, 400);
+
+                dot2.className = "w-2.5 h-2.5 rounded-full bg-white/20";
+                dot3.className = "w-3 h-3 rounded-full bg-roseGold shadow-lg shadow-pink-500/80 scale-125 transition-all duration-500";
+                chapterTitle.innerText = "GRAND WISH";
+            }
+        }
+
+        // --- 2. CANDLE BLOWOUT WITH REAL SMOKE PHYSICS ---
+        const cakeContainer = document.getElementById('cake3DContainer');
+        let candlesBlown = false;
+
+        cakeContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (candlesBlown) return;
+
+            const flames = [document.getElementById('flame1'), document.getElementById('flame2'), document.getElementById('flame3')];
+            const candleHintText = document.getElementById('candleHintText');
+
+            flames.forEach((flame, index) => {
+                flame.classList.add('flame-extinguished');
+                spawnSmokeTrail(flame.parentElement);
+            });
+
+            candlesBlown = true;
+            candleHintText.innerHTML = `<i class="fas fa-check-circle text-green-400"></i> Wishes sent into the stars! ✨`;
+            candleHintText.className = "mt-4 text-xs bg-green-500/20 text-green-200 px-4 py-1.5 rounded-full border border-green-500/30";
+
+            playBlowSFX();
+            triggerSparklerBurst();
+        });
+
+        function spawnSmokeTrail(parent) {
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'smoke-particle';
+                    particle.style.left = `${(Math.random() * 12) - 6}px`;
+                    parent.appendChild(particle);
+
+                    setTimeout(() => particle.remove(), 3000);
+                }, i * 200);
+            }
+        }
+
+        // --- 3. ACOUSTIC PIANO WEB AUDIO SYNTHESIZER ---
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        const PIANO_NOTES = {
+            C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, B4: 493.88,
+            C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00
+        };
+
+        const birthdayMelody = [
+            { note: PIANO_NOTES.G4, duration: 0.35 },
+            { note: PIANO_NOTES.G4, duration: 0.25 },
+            { note: PIANO_NOTES.A4, duration: 0.6 },
+            { note: PIANO_NOTES.G4, duration: 0.6 },
+            { note: PIANO_NOTES.C5, duration: 0.6 },
+            { note: PIANO_NOTES.B4, duration: 1.0 },
+
+            { note: PIANO_NOTES.G4, duration: 0.35 },
+            { note: PIANO_NOTES.G4, duration: 0.25 },
+            { note: PIANO_NOTES.A4, duration: 0.6 },
+            { note: PIANO_NOTES.G4, duration: 0.6 },
+            { note: PIANO_NOTES.D5, duration: 0.6 },
+            { note: PIANO_NOTES.C5, duration: 1.0 },
+
+            { note: PIANO_NOTES.G4, duration: 0.35 },
+            { note: PIANO_NOTES.G4, duration: 0.25 },
+            { note: PIANO_NOTES.G5, duration: 0.6 },
+            { note: PIANO_NOTES.E5, duration: 0.6 },
+            { note: PIANO_NOTES.C5, duration: 0.6 },
+            { note: PIANO_NOTES.B4, duration: 0.6 },
+            { note: PIANO_NOTES.A4, duration: 0.8 },
+
+            { note: PIANO_NOTES.F5, duration: 0.35 },
+            { note: PIANO_NOTES.F5, duration: 0.25 },
+            { note: PIANO_NOTES.E5, duration: 0.6 },
+            { note: PIANO_NOTES.C5, duration: 0.6 },
+            { note: PIANO_NOTES.D5, duration: 0.6 },
+            { note: PIANO_NOTES.C5, duration: 1.2 }
+        ];
+
+        function playPianoTone(freq, duration, timeOffset = 0) {
+            if (!audioContext || !isAudioPlaying) return;
+
+            setTimeout(() => {
+                try {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+
+                    // Soft Sine + Harmonics for acoustic warmth
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+
+                    const now = audioContext.currentTime;
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+
+                    osc.start(now);
+                    osc.stop(now + duration);
+                } catch(e) {}
+            }, timeOffset * 1000);
+        }
+
+        function playPianoLoop() {
+            if (!isAudioPlaying) return;
+            let offset = 0;
+            birthdayMelody.forEach(item => {
+                playPianoTone(item.note, item.duration, offset);
+                offset += item.duration + 0.08;
+            });
+
+            melodyLoopTimeout = setTimeout(() => {
+                if (isAudioPlaying) playPianoLoop();
+            }, (offset + 1.2) * 1000);
+        }
+
+        function togglePianoMelody() {
+            initAudio();
+            const btnText = document.getElementById('audioStatusText');
+            const btnIcon = document.getElementById('audioIcon');
+
+            if (isAudioPlaying) {
+                isAudioPlaying = false;
+                if (melodyLoopTimeout) clearTimeout(melodyLoopTimeout);
+                btnText.innerText = "Piano: OFF";
+                btnIcon.className = "fas fa-music text-gray-400";
+            } else {
+                isAudioPlaying = true;
+                btnText.innerText = "Piano: ON";
+                btnIcon.className = "fas fa-music text-warmGold animate-bounce";
+                playPianoLoop();
+            }
+        }
+
+        document.getElementById('audioControlBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePianoMelody();
+        });
+
+        // Sound Effects
+        function playChimeSFX() {
+            try {
+                initAudio();
+                const now = audioContext.currentTime;
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } catch(e) {}
+        }
+
+        function playBlowSFX() {
+            try {
+                initAudio();
+                const now = audioContext.currentTime;
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(250, now);
+                osc.frequency.exponentialRampToValueAtTime(80, now + 0.4);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } catch(e) {}
+        }
+
+        // --- 4. SPARKLERS & FIREWORKS CELEBRATION ---
+        function triggerCelebrationFireworks() {
+            const duration = 3.5 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 70, zIndex: 100 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+
+                const particleCount = 45 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.15, 0.35), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.65, 0.85), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        function triggerSparklerBurst() {
+            confetti({
+                particleCount: 140,
+                spread: 90,
+                origin: { y: 0.6 },
+                colors: ['#F5D061', '#E8A598', '#FFC0CB', '#FFFFFF']
+            });
+            playChimeSFX();
+        }
+
+        // --- 5. CANVAS PARTICLES & GLOW STARS ---
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 20;
+                this.size = Math.random() * 3.5 + 1;
+                this.speedY = Math.random() * 0.7 + 0.3;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.7 + 0.2;
+                this.isHeart = Math.random() > 0.45;
+                this.color = ['#FFC0CB', '#F5D061', '#E8A598', '#FFFFFF'][Math.floor(Math.random() * 4)];
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -20) this.reset();
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+
+                if (this.isHeart) {
+                    ctx.beginPath();
+                    const topCurveHeight = this.size * 0.3;
+                    ctx.moveTo(this.x, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+                    ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+                    ctx.bezierCurveTo(this.x, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight, this.x + this.size / 2, this.y);
+                    ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 55; i++) {
+            particles.push(new Particle());
+        }
+
+        function renderCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(renderCanvas);
+        }
+
+        // --- 6. 3D TILT EFFECT ON CARDS ---
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y / 18}deg) rotateY(${x / 18}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        });
+
+        window.onload = function() {
+            renderCanvas();
+        };
+    </script>
+</body>
+</html>
